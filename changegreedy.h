@@ -1,0 +1,1 @@
+void changegreedy(int v[],int c[],a);
