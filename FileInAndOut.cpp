@@ -13,7 +13,7 @@ void InAndOut::loadFile(vector<struct changeInfo>& changeData, char* fileName){
     ifstream myFile;
     
     myFile.open(fileName);
-    cout << "Opening file\"" << fileName << "\"..." << endl;
+    cout << "Opening file: \"" << fileName << "\"..." << endl;
     
     if(!myFile){
         cout << "You goofed, file cannot be opened." << endl;
@@ -57,6 +57,7 @@ void InAndOut::saveTXTFile(struct changeInfo& changeData){
     
     ofstream outFile;
     outFile.open(TXT_FILE_OUT, ios::out | ios::app);
+    cout << "Saving file as: " << TXT_FILE_OUT << endl;
     
     if(outFile.is_open()){
         outFile << "Algo in use: " << changeData.algoName << endl;
@@ -74,7 +75,6 @@ void InAndOut::saveTXTFile(struct changeInfo& changeData){
         }
 
         outFile << endl << "\t" <<changeData.amount << endl;
-        cout << "Done\n";
     }
     else
         cout << "What did you do?" << endl;
@@ -86,10 +86,32 @@ void InAndOut::saveTXTFile(struct changeInfo& changeData){
 }
 
 
-void saveCVSfile(struct changeInfo& changeData){
-    const char* FILENAME = "results.csv";
-    ofstream outFile;
+void InAndOut::saveCVSFile(vector<struct changeInfo>& changeData){
 
+    ofstream outFile;
+    //create file name of: "<algo name>results.csv"
+    char* fileName = strdup(changeData[0].algoName.c_str());
+    //make the new filename
+    strcat(fileName, CSV_FILE_OUT);
     
+    //open the file and direct to append to the end if neccesary
+    outFile.open(fileName, ios::out| ios::app);
     
+    //save the runtimes
+    if(outFile.is_open()){
+        for(int i = 0; i < changeData.size(); ++i){
+            outFile << changeData[i].runtime << " ";
+        }
+        
+        cout << endl;
+    }
+    
+    cout << "Saved Results as: " << fileName <<endl;
+    
+    outFile.close();
+    outFile.clear();
+    
+    free(fileName);
+    
+    return;
 }

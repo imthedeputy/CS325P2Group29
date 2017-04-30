@@ -15,11 +15,14 @@
 #include <iostream>
 #include <chrono>
 #include <time.h>
+#include <string>
 #include "changeInfo.hpp"
 #include "FileInAndOut.hpp"
 
 void algo1(struct changeInfo& changeData);
-int min(int a, int b);
+void algo2(struct changeInfo& changeData);
+void algo3(struct changeInfo& changeData);
+
 
 
 

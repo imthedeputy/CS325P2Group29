@@ -24,10 +24,7 @@ public:
     
     void saveTXTFile(struct changeInfo& changeData);
     
-    void saveCVSFile(struct changeInfo& changeData);
-    
-    void print(struct changeInfo& changeData);
-    
+    void saveCVSFile(std::vector<struct changeInfo>& changeData);
     
     
 private:
