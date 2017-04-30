@@ -89,11 +89,28 @@ void algo1(struct changeInfo& changeData){
     return;
 }
 
-void algo2(struct changeInfo& changeData){
-    cout << "do something " << endl;
-    
-}
+void algo2(struct changeInfo& changeData) {
 
+    changeData.denoms.begin();
+
+    int l = (int)changeData.denoms.size();
+    int* v = new int[l];
+    int* c = new int[l];
+
+    for (int i = 0; i < l; ++i) {
+        v[i] = changeData.denoms[i];
+    }
+
+    auto start = chrono::high_resolution_clock::now();
+    changegreedy(v,c,changeData.amount,l);
+    auto elapsed = chrono::high_resolution_clock::now() - start; //get elapsed time
+
+    changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count(); //save time elapsed;
+
+    for (int i = 0; i < l; ++i) {
+        changeData.denomsUsed.push_back(c[i]);
+    }
+}
 
 void algo4(struct chnageInfo& changeData){
     cout << "do something " << endl;
