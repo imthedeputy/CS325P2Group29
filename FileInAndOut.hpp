@@ -20,16 +20,21 @@
 class InAndOut{
 public:
     
-    void loadFile(struct changeInfo& changeData, char* fileName);    void saveTxtFile(struct changeInfo, int algoInUse);
-    void saveTXTfile(struct chaangeinfo& changeData, int agloInUse);
+    void loadFile(std::vector<struct changeInfo>& changeData, char* fileName);
     
-    void saveCVSFile(struct changeInfo& changeData, int algoInUse);
+    void saveTXTFile(struct changeInfo& changeData);
+    
+    void saveCVSFile(struct changeInfo& changeData);
+    
+    void print(struct changeInfo& changeData);
     
     
     
 private:
-    char* fileNameIn;
-    char* fileNameOut;
     
+    const char TXT_FILE_OUT[20] = "AmountChange.txt";
+    const char CSV_FILE_OUT[20] = "results.csv";
 };
+
+
 #endif /* FileInAndOut_hpp */
