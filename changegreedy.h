@@ -1,1 +1,1 @@
-void changegreedy(int v[],int c[],a);
+void changegreedy(int v[],int c[], int a, int length);

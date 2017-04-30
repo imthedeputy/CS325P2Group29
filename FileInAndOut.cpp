@@ -30,12 +30,10 @@ void InAndOut::loadFile(vector<struct changeInfo>& changeData, char* fileName){
             char c[5];
             while(iss >> n){
                 changeData[i].denoms.push_back(n);
-                cout << n << endl;
             }
             
             myFile.getline(c, 10, '\n');
             changeData[i].amount = stoi(c);
-            cout << changeData[i].amount << endl;
             ++i;
     
         }

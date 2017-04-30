@@ -59,20 +59,19 @@ int main(int argc, const char * argv[]) {
     
     //
     for(int i = 0; i < changeData.size(); ++i){
-        if(algoInUse == 1){
+        if(i < 3){
             algo1(changeData[i]);
             stuff.saveTXTFile(changeData[i]);
         }
         
-        else if (algoInUse == 2){
-            //algo2(changeData[i]);
-            //stuff.saveTXTFile(changeData[i]);
+        else if (i >= 3 && i < 6){
+            algo2(changeData[i]);
+            stuff.saveTXTFile(changeData[i]);
         }
-        else if(algoInUse ==3){
+        else if(i >=6 && i < 9){
             //algo3(changeData[i]);
             //stuff.saveTXTFile(changeData[i]);
         }
-        ++algoInUse;
     }
 
     cout << "Done" << endl;

@@ -64,6 +64,27 @@ void changeslow(int amount, int index, vector<int>& coinsUsed, vector<int>& coin
 }
 
 
+void changegreedy(int v[], int c[], int a, int length) {
+    int tempTotal = a;
+    
+    /*This is more efficient, but doesn't as closely adhere to the description
+     of this algorithm presented in the project description.
+     
+     for (int i = length - 1; i >= 0; --i) {
+     c[i] = tempTotal / v[i];
+     tempTotal = tempTotal \ v[i];
+     }*/
+    
+    for (int i = length - 1; i >= 0; --i) {
+        c[i] = 0;
+        
+        while(v[i] >= tempTotal) {
+            c[i]++;
+            tempTotal -= v[i];
+        }
+    }
+}
+
 
 void algo1(struct changeInfo& changeData){
     //get the size of the denoms vector
@@ -112,7 +133,35 @@ void algo2(struct changeInfo& changeData) {
     }
 }
 
-void algo4(struct chnageInfo& changeData){
+void algo3(struct chnageInfo& changeData){
     cout << "do something " << endl;
     
 }
+
+
+void makeAlgo1TestSet(vector<struct changeInfo>& changeTestSet, vector<int> denomInput){
+    const int size = 50;
+    changeTestSet.resize(size);
+    
+    for(int i = 0; i < size; ++i){
+        changeTestSet[i].amount = i + 1;
+        changeTestSet[i].denoms = denomInput;
+        
+    }
+    
+    return;
+}
+
+void makeAlgo2and3TestSet(std::vector<struct changeInfo>& changeTestSet, std::vector<int> denomInput){
+    const int size = 200;
+    const int largeNumber = 2000;
+    changeTestSet.resize(size);
+    
+    for(int i = 0; i < size; ++i){
+        changeTestSet[i].amount = i + largeNumber;
+        changeTestSet[i].denoms = denomInput;
+    }
+    
+    return;
+}
+

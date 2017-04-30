@@ -18,6 +18,7 @@
 #include <string>
 #include "changeInfo.hpp"
 #include "FileInAndOut.hpp"
+
 #include <climits>
 void algo1(struct changeInfo& changeData);
 void algo2(struct changeInfo& changeData);
@@ -25,6 +26,7 @@ void algo3(struct changeInfo& changeData);
 
 void makeAlgo1TestSet(std::vector<struct changeInfo>& changeTestSet, std::vector<int> denomInput);
 
+void makeAlgo2and3TestSet(std::vector<struct changeInfo>& changeTestSet, std::vector<int> denomInput);
 
 
 #endif /* helperFunctions_hpp */
