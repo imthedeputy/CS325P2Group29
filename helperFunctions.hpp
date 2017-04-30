@@ -16,9 +16,9 @@
 #include <chrono>
 #include <time.h>
 #include "changeInfo.hpp"
+#include "FileInAndOut.hpp"
 
-
-int algo1(int index, std::vector<int>& coins, int amount);
+void algo1(struct changeInfo& changeData);
 int min(int a, int b);
 
 

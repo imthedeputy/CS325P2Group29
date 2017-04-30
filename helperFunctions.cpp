@@ -9,67 +9,83 @@
 #include "helperFunctions.hpp"
 
 using namespace std;
-int makeChange(int index, std::vector<int>& coins, int amount){
-    //is there money left?
-    if(amount == 0)
-        return 0;
-    //if the denom index is less than the number of coins and the amounts is greater than 0 we can still make change
-    if(index < coins.size() && amount > 0){
-        int maxVal = amount/coins[index]; //maximum number of coins that it will take to to the amount in question
-        int minCost = INT_MAX;
-        //do this up to the maximum number of coins
-        for(int i = 0; i <= maxVal; i++){
-            //if the current coin value *  is still less than the amount to make change for
-            if(amount >= i * coins[index]){
-                //calculate what is left over for the next round
-                int result = makeChange(index + 1, coins, amount - i * coins[index]);
-                //
-                if(result != -1)
-                    minCost = min(minCost, result + i);
-            }
-            
-            
-        }
-        //after the loop is done did we get to find a solution that provides correct changes? if not return -1, if so returtn the number of coins used
-        return (minCost == INT_MAX)? -1: minCost;
-        
+
+
+int coinCount(vector<int>& denomsUsed){
+    int sum = 0;
+    for(int i = 0; i < denomsUsed.size(); ++i){
+        sum += denomsUsed[i];
     }
-    return -1;
+    return sum;
 }
 
-void algo1(struct changeInfo changeData, int amount){
-    //start run time calcs
-    auto start = chrono::high_resolution_clock::now();
-    makeChange(0, changeData.denoms, amount);
-    //hoq long did it run for?
-    auto elapsed = chrono::high_resolution_clock::now() - start; //get elapsed time
-    changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count(); //save time elapsed;
+void changeslow(int amount, int index, vector<int>& coinsUsed, vector<int>& coins, vector<int>& savedCombo, int& totalCoins){
+    //index is out of bounds
+    if(index >= coins.size()){
+        int sumComboNew = 0;
+        
+        //to determine which combination produces the smallest number of coins used, sum through each vector and compare their sums. save the smallest vector as to the saved combo
+        sumComboNew =coinCount(coinsUsed);    
+        //is the new total coins less than the previous iteration? if so save this vector as the one of interest
+        if(sumComboNew < totalCoins){
+            totalCoins = sumComboNew;
+            savedCombo = coinsUsed;
+        }
+        return;
+    }
+        
     
+    
+    
+    //if we are at the last index
+    if(index == coins.size() -1){
+        //is this a good coin to use? meaning it produces no remainder?
+        if(amount % coins[index] == 0){
+            //add it to the count
+            coinsUsed[index] = amount/coins[index];
+            //recursive call to get out of here
+            changeslow(0, index + 1, coinsUsed, coins, savedCombo, totalCoins);
+        }
+        
+    }
+    //we are not at the last index
+    else{
+        //get the amount
+        for(int i = 0; i <= amount/coins[index]; ++i){
+            coinsUsed[index] = i;
+            //to get the new amount, take the amount subtract the type of coin we are using and the number determined by the index
+            int newAmount = (amount - coins[index] * i);
+            //move to the next index of the coin array and start this over
+            changeslow(newAmount, index + 1, coinsUsed, coins, savedCombo, totalCoins);
+        }
+    }
     return;
 }
 
-void algo2(changeInfo* changeData, int target) {
 
-    changeData->denoms.begin();
 
-    int l = changeData->denoms.size();
-    int* v = new int[l];
-    int* c = new int[l];
-
-    for (int i = 0; i < l; ++i) {
-        v[i] = changeData->denoms[i];
-    }
-
+void algo1(struct changeInfo& changeData){
+    //get the size of the denoms vector
+    int size = (int)changeData.denoms.size();
+    int totalCoins = INT_MAX;
+    //initialize vector of size == denom.size, with values of maximum integer/ denoms.size so comparisos can be made and no overflows occur
+    vector<int> savedCombo;
+    changeData.denomsUsed.resize(size);
+    
+    //start run time calcs
     auto start = chrono::high_resolution_clock::now();
-    changegreedy(v,c,target,l);
+    
+    //call algo
+    changeslow(changeData.amount, 0, changeData.denomsUsed, changeData.denoms, savedCombo, totalCoins);
+    
+    //how long did it run for?
     auto elapsed = chrono::high_resolution_clock::now() - start; //get elapsed time
-
-    changeData->runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count(); //save time elapsed;
-
-    for (int i = 0; i < l; ++i) {
-        changeData->denomsUsed.push_back(c[i]);
-    }
-
-    delete[] v;
-    delete[] c;
+    changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count(); //save time elapsed;
+    //save the minimum change combination
+    changeData.denomsUsed = savedCombo;
+    //save the number of coins usd
+    changeData.coinsUsed = coinCount(changeData.denomsUsed);
+    return;
 }
+
+
