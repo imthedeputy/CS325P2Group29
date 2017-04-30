@@ -86,37 +86,45 @@ void InAndOut::saveTXTFile(struct changeInfo& changeData){
 }
 
 
-void InAndOut::saveCVSFile(vector<struct changeInfo>& changeData, int n[]){
+void InAndOut::saveCVSFile(vector<struct changeInfo>& changeData){
 
     ofstream outFile;
-    //create file name of: "<algo name>results.csv"
-    char* fileName = strdup(changeData[0].algoName.c_str());
-    //make the new filename
-    strcat(fileName, CSV_FILE_OUT);
+
     
     //open the file and direct to append to the end if neccesary
-    outFile.open(fileName, ios::out| ios::app);
+    outFile.open(CSV_FILE_OUT, ios::out| ios::app);
     
     //save the runtimes
     if(outFile.is_open()){
+        //output runtime data for each denomination set and amount
+        outFile << "Runtime, ";
         for(int i = 0; i < changeData.size(); ++i){
             outFile << changeData[i].runtime << ", ";
         }
         
-        cout << endl;
+        outFile << endl;
+        outFile << "Coins Used, ";
+        //output for the number of coins given amount
         for(int i = 0; i < changeData.size(); ++i){
-            outFile << n[i] << ", ";
+            outFile << changeData[i].coinsUsed << ", " ;
         }
-        cout << endl;
+        outFile << endl;
+        
+        //output for the amount variable
+        outFile << "Amount, ";
+        for(int i = 0; i < changeData.size(); ++i){
+            outFile << changeData[i].amount << ", ";
+        }
+        
+        outFile << endl;
     }
     
     
-    cout << "Saved Results as: " << fileName <<endl;
+    cout << "Saved Results as: " << CSV_FILE_OUT <<endl;
     
     outFile.close();
     outFile.clear();
     
-    free(fileName);
     
     return;
 }

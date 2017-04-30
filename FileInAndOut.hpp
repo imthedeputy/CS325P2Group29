@@ -24,8 +24,8 @@ public:
     void loadFile(std::vector<struct changeInfo>& changeData, char* fileName);
     //saves results from the algos in a txt file
     void saveTXTFile(struct changeInfo& changeData);
-    //saves runtime data for each algo test paired with the 'n' used for the that test
-    void saveCVSFile(std::vector<struct changeInfo>& changeData, int n[]);
+    //saves runtime data for each algo test and the amount that was used for each runtime and the minimum number of coins that was caclulated
+    void saveCVSFile(std::vector<struct changeInfo>& changeData);
     
     
 private:
