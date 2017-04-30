@@ -90,11 +90,12 @@ void algo1(struct changeInfo& changeData){
 }
 
 void algo2(struct changeInfo& changeData){
+    cout << "do something " << endl;
     
 }
 
 
 void algo4(struct chnageInfo& changeData){
-    
+    cout << "do something " << endl;
     
 }

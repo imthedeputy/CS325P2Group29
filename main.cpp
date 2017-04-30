@@ -15,13 +15,17 @@
 using namespace std;
 int main(int argc, const char * argv[]) {
     char fileIn[20];
+    const char testFile[20] = "test.txt"; //default txt file name
+    
     //if no cmd line argument is given specify a txt file to use
     if(argv[0] == NULL){
+        
+        cout << "No CMD line arugment was provided, using: " << testFile << endl;
         strcpy(fileIn, "test.txt");
     }
     
     else{
-        strcpy(fileIn, argv[0]);
+        strcpy(fileIn, argv[1]);
     }
     
     class InAndOut stuff; //file in and out variable used for getting and saving data to and from a txt file
@@ -61,19 +65,16 @@ int main(int argc, const char * argv[]) {
         }
         
         else if (algoInUse == 2){
-            algo2(changeData[i]);
-            stuff.saveTXTFile(changeData[i]);
+            //algo2(changeData[i]);
+            //stuff.saveTXTFile(changeData[i]);
         }
         else if(algoInUse ==3){
-            algo3(changeData[i]);
-            stuff.saveTXTFile(changeData[i]);
+            //algo3(changeData[i]);
+            //stuff.saveTXTFile(changeData[i]);
         }
         ++algoInUse;
     }
 
-    
-    
-    
     cout << "Done" << endl;
     
     

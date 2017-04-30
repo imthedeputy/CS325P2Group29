@@ -86,7 +86,7 @@ void InAndOut::saveTXTFile(struct changeInfo& changeData){
 }
 
 
-void InAndOut::saveCVSFile(vector<struct changeInfo>& changeData){
+void InAndOut::saveCVSFile(vector<struct changeInfo>& changeData, int n[]){
 
     ofstream outFile;
     //create file name of: "<algo name>results.csv"
@@ -100,11 +100,16 @@ void InAndOut::saveCVSFile(vector<struct changeInfo>& changeData){
     //save the runtimes
     if(outFile.is_open()){
         for(int i = 0; i < changeData.size(); ++i){
-            outFile << changeData[i].runtime << " ";
+            outFile << changeData[i].runtime << ", ";
         }
         
         cout << endl;
+        for(int i = 0; i < changeData.size(); ++i){
+            outFile << n[i] << ", ";
+        }
+        cout << endl;
     }
+    
     
     cout << "Saved Results as: " << fileName <<endl;
     
