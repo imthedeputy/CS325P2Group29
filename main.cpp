@@ -19,7 +19,7 @@ int main(int argc, const char * argv[]) {
     
     //if no cmd line argument is given specify a txt file to use
     if(argv[0] == NULL){
-        
+//        
         cout << "No CMD line arugment was provided, using: " << testFile << endl;
         strcpy(fileIn, "test.txt");
     }
@@ -55,14 +55,12 @@ int main(int argc, const char * argv[]) {
         }
     }
     
-    int algoInUse = 1; //determines which algo to use for denom and amount sets
-    
-    //
+
     for(int i = 0; i < changeData.size(); ++i){
         if(i < 3){
             algo1(changeData[i]);
             stuff.saveTXTFile(changeData[i]);
-        }
+}
         
         else if (i >= 3 && i < 6){
             algo2(changeData[i]);

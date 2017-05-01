@@ -30,9 +30,10 @@ int main(int argc, const char * argv[]) {
     vector<struct changeInfo> changeTestSet;
     //change denoms vector denoms[0] = v1, denoms[1] = v2, denoms[2]= v3;
     vector<vector<int>> denoms = {{1, 2, 6, 12, 24, 48, 60}, {1, 5, 10, 25, 50}, {1, 6, 13, 37, 15}};
-    
+    int algoTest = 2;
+    int denomTestSet = 1;
     if(algoTest == 1){
-        cout << "Using algo 1 and denom test set " << denomTestSet + 1 << endl;
+        cout << "Using algo 1 and denom test set " << denomTestSet << endl;
         makeAlgo1TestSet(changeTestSet, denoms[denomTestSet - 1]);
         for(int i = 0; i < changeTestSet.size(); ++i){
             algo1(changeTestSet[i]);
@@ -41,7 +42,7 @@ int main(int argc, const char * argv[]) {
     }
     
     else if(algoTest == 2){
-        cout << "Using algo 2 and denom test set " << denomTestSet + 1 << endl;
+        cout << "Using algo 2 and denom test set " << denomTestSet << endl;
         makeAlgo2and3TestSet(changeTestSet, denoms[denomTestSet - 1]);
         for(int i = 0; i < changeTestSet.size(); ++i){
             algo2(changeTestSet[i]);

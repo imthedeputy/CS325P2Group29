@@ -39,9 +39,6 @@ void InAndOut::loadFile(vector<struct changeInfo>& changeData, char* fileName){
         }
     }
         
-    
-    
-    
     //close the file
     myFile.close();
     //clear the file

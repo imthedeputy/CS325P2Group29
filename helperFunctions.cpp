@@ -78,7 +78,7 @@ void changegreedy(int v[], int c[], int a, int length) {
     for (int i = length - 1; i >= 0; --i) {
         c[i] = 0;
         
-        while(v[i] >= tempTotal) {
+        while(v[i] <= tempTotal) {
             c[i]++;
             tempTotal -= v[i];
         }
@@ -124,6 +124,8 @@ void algo2(struct changeInfo& changeData) {
 
     auto start = chrono::high_resolution_clock::now();
     changegreedy(v,c,changeData.amount,l);
+    
+    //changegreedyTWO(changeData.denoms, changeData.coinsUsed, amount);
     auto elapsed = chrono::high_resolution_clock::now() - start; //get elapsed time
 
     changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count(); //save time elapsed;
@@ -131,6 +133,10 @@ void algo2(struct changeInfo& changeData) {
     for (int i = 0; i < l; ++i) {
         changeData.denomsUsed.push_back(c[i]);
     }
+    
+    changeData.coinsUsed = coinCount(changeData.denomsUsed);
+    delete []v;
+    delete []c;
 }
 
 void algo3(struct chnageInfo& changeData){
@@ -139,7 +145,7 @@ void algo3(struct chnageInfo& changeData){
 }
 
 
-void makeAlgo1TestSet(vector<struct changeInfo>& changeTestSet, vector<int> denomInput){
+void makeAlgo1TestSet(vector<struct changeInfo>& changeTestSet, vector<int>& denomInput){
     const int size = 50;
     changeTestSet.resize(size);
     
@@ -152,7 +158,7 @@ void makeAlgo1TestSet(vector<struct changeInfo>& changeTestSet, vector<int> deno
     return;
 }
 
-void makeAlgo2and3TestSet(std::vector<struct changeInfo>& changeTestSet, std::vector<int> denomInput){
+void makeAlgo2and3TestSet(std::vector<struct changeInfo>& changeTestSet, std::vector<int>& denomInput){
     const int size = 200;
     const int largeNumber = 2000;
     changeTestSet.resize(size);
