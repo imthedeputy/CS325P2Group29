@@ -1,5 +1,21 @@
 CXX = g++
-CXXFLAGS = -c -std=c++98 -Wall
+FLAGS = -c -std=c++11 -Wall
 
-changegreedy.o: changegreedy.h changegreedy.cpp
-	${CXX} ${CXXFLAGS} changegreedy.cpp
+fileprog: helperFunctions.o FileInAndOut.o
+	${CXX} -o fileprog main.cpp helperFunctions.o FileInAndOut.o
+
+FileInAndOut.o: FileInAndOut.cpp FileInAndOut.hpp changeInfo.hpp
+	${CXX} ${FLAGS} FileInAndOut.cpp
+
+helperFunctions.o: helperFunctions.cpp helperFunctions.hpp changeInfo.hpp
+	${CXX} ${FLAGS} helperFunctions.cpp
+
+experimentprog: helperFunctions.o FileInAndOut.o
+	${CXX} -o experimentprog experimental.cpp helperFunctions.o FileInAndOut.o
+
+all: fileprog experimentprog
+
+default: fileprog
+
+clean:
+	rm -f *.o fileprog experimentprog
