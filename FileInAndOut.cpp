@@ -58,18 +58,18 @@ void InAndOut::saveTXTFile(struct changeInfo& changeData){
         outFile << "Algo in use: " << changeData.algoName << endl;
         outFile << "\t";
         
-        for(int i = 0; i < changeData.denoms.size(); ++i){
+        for(int i = 0; i < (int)changeData.denoms.size(); ++i){
             outFile << changeData.denoms[i] << " ";
         }
         
         outFile << endl;
         outFile << "\t";
 
-        for(int i = 0; i < changeData.denoms.size(); ++i){
+        for(int i = 0; i < (int)changeData.denoms.size(); ++i){
             outFile << changeData.denomsUsed[i] << " ";
         }
 
-        outFile << endl << "\t" <<changeData.amount << endl;
+        outFile << endl << "\t" <<changeData.coinsUsed << endl;
     }
     else
         cout << "What did you do?" << endl;
@@ -93,21 +93,21 @@ void InAndOut::saveCVSFile(vector<struct changeInfo>& changeData){
     if(outFile.is_open()){
         //output runtime data for each denomination set and amount
         outFile << "Runtime, ";
-        for(int i = 0; i < changeData.size(); ++i){
+        for(int i = 0; i < (int)changeData.size(); ++i){
             outFile << changeData[i].runtime << ", ";
         }
         
         outFile << endl;
         outFile << "Coins Used, ";
         //output for the number of coins given amount
-        for(int i = 0; i < changeData.size(); ++i){
+        for(int i = 0; i < (int)changeData.size(); ++i){
             outFile << changeData[i].coinsUsed << ", " ;
         }
         outFile << endl;
         
         //output for the amount variable
         outFile << "Amount, ";
-        for(int i = 0; i < changeData.size(); ++i){
+        for(int i = 0; i < (int)changeData.size(); ++i){
             outFile << changeData[i].amount << ", ";
         }
         

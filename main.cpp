@@ -15,18 +15,18 @@
 using namespace std;
 int main(int argc, const char * argv[]) {
     char fileIn[20];
-    const char testFile[20] = "test.txt"; //default txt file name
+    char testFile[20] = "coins.txt"; //default txt file name
     
     //if no cmd line argument is given specify a txt file to use
-    if(argv[0] == NULL){
-//        
-        cout << "No CMD line arugment was provided, using: " << testFile << endl;
-        strcpy(fileIn, "test.txt");
-    }
-    
-    else{
-        strcpy(fileIn, argv[1]);
-    }
+//    if(argv[0] == NULL){
+////        
+//        cout << "No CMD line arugment was provided, using: " << testFile << endl;
+//        strcpy(fileIn, "test.txt");
+//    }
+//    
+//    else{
+//        strcpy(fileIn, argv[1]);
+//    }
     
     class InAndOut stuff; //file in and out variable used for getting and saving data to and from a txt file
     
@@ -35,7 +35,7 @@ int main(int argc, const char * argv[]) {
     
     //read the contents from the text file into the temp vector
     
-    stuff.loadFile(txtStuff, fileIn);
+    stuff.loadFile(txtStuff, testFile);
     //copy stuff from txt file into the data set
     for(int i = 0; i < changeData.size(); ++i){
         if(i < 3){
@@ -67,8 +67,8 @@ int main(int argc, const char * argv[]) {
             stuff.saveTXTFile(changeData[i]);
         }
         else if(i >=6 && i < 9){
-            //algo3(changeData[i]);
-            //stuff.saveTXTFile(changeData[i]);
+            algo3(changeData[i]);
+            stuff.saveTXTFile(changeData[i]);
         }
     }
 

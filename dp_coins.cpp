@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <climits>
-#include "changeInfo.hpp"
+//#include "changeInfo.hpp"
 
 using namespace std;
 
@@ -24,33 +24,34 @@ int main() {
     int a3 = 120;
     int s3 = sizeof(v3) / sizeof(int);
 
-    int c[s0] = {}; 
+	int m;
+    int c[s1] = {}; 
 
-    change_dp(v0, c, s0, a0);
+    changedp(v1, c, s1, a1, m);
 
     return 0;
 }
 
-void algo3(struct changeInfo changeData, int amount) {
-    int m;
-    int length = changeData.denoms.size();
-    
-    int V[length];
-    copy(changeData.denoms.begin(), changeData.denoms.end(), V); 
-    
-    int C[length] = {}; 
-    
-    auto start = chrono::high_resolution_clock::now();
-    changedp(V, C, length, amount, m); 
-    auto elapsed = chrono::high_resolution_clock::now() - start;
-    changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
-
-    for(int i = 0; i < length; i++) {
-        changeData.denomsUsed.push_back(C[i]);
-    }
-
-    changeData.amount = m;
-}
+//void algo3(struct changeInfo changeData, int amount) {
+//    int m;
+//    int length = changeData.denoms.size();
+//    
+//    int V[length];
+//    copy(changeData.denoms.begin(), changeData.denoms.end(), V); 
+//    
+//    int C[length] = {}; 
+//    
+//    auto start = chrono::high_resolution_clock::now();
+//    changedp(V, C, length, amount, m); 
+//    auto elapsed = chrono::high_resolution_clock::now() - start;
+//    changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+//
+//    for(int i = 0; i < length; i++) {
+//        changeData.denomsUsed.push_back(C[i]);
+//    }
+//
+//    changeData.amount = m;
+//}
 
 void changedp(int V[], int C[], int length, int A, int m) {
     int cases[A + 1]; 

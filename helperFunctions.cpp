@@ -13,7 +13,7 @@ using namespace std;
 
 int coinCount(vector<int>& denomsUsed){
     int sum = 0;
-    for(int i = 0; i < denomsUsed.size(); ++i){
+    for(int i = 0; i < (int)denomsUsed.size(); ++i){
         sum += denomsUsed[i];
     }
     return sum;
@@ -21,7 +21,7 @@ int coinCount(vector<int>& denomsUsed){
 
 void changeslow(int amount, int index, vector<int>& coinsUsed, vector<int>& coins, vector<int>& savedCombo, int& totalCoins){
     //index is out of bounds, we need to find out what the results were
-    if(index >= coins.size()){
+    if(index >= (int)coins.size()){
         int sumComboNew = 0;
         
         //to determine which combination produces the smallest number of coins used, sum through each vector and compare their sums. save the smallest vector as saved combo
@@ -38,7 +38,7 @@ void changeslow(int amount, int index, vector<int>& coinsUsed, vector<int>& coin
     }
     
     //if we are at the last index
-    if(index == coins.size() -1){
+    if(index == (int)coins.size() -1){
         //is this a good coin to use? meaning it produces no remainder?
         if(amount % coins[index] == 0){
             //add it to the count
@@ -85,7 +85,22 @@ void changegreedy(int v[], int c[], int a, int length) {
     }
 }
 
-void changedp(int V[], int C[], int length, int A, int m) {
+void changedp(int V[], int C[], int length, int A) {
+	int m;
+
+	cout << "V = ";
+	for(int i = 0; i < length; i++) {
+		cout << V[i] << " ";
+	}
+	cout << endl;
+
+	cout << "length = " << length << endl;
+	cout << "A = " << A << endl;
+
+	for(int i = 0; i < length; i++) {
+		C[i] = 0;
+	}
+
     int cases[A + 1]; 
     int result[A + 1];
 
@@ -125,7 +140,15 @@ void changedp(int V[], int C[], int length, int A, int m) {
     }
     cout << endl;
 
+	cout << "C = ";
+	for(int i = 0; i < length; i++) {
+		cout << C[i] << " ";
+	}
+	cout << endl;
+
     m = cases[A];
+
+	cout << "m = " << m << endl;
 
 //    cout << "Min coins = " << cases[A] << endl;
 //    cout << "C = ";
@@ -200,13 +223,16 @@ void algo3(struct changeInfo& changeData){
 	}
     
     auto start = chrono::high_resolution_clock::now();
-    changedp(V, C, length, changeData.amount, changeData.coinsUsed); 
+    changedp(V, C, length, changeData.amount); 
     auto elapsed = chrono::high_resolution_clock::now() - start;
     changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 
     for(int i = 0; i < length; i++) {
         changeData.denomsUsed.push_back(C[i]);
     }
+
+	changeData.coinsUsed = coinCount(changeData.denomsUsed);
+	cout << "coinsUsed = " << changeData.coinsUsed << endl;
 
 	delete []V;
 	delete []C;
