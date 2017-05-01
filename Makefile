@@ -1,5 +1,5 @@
-comp:
-	g++ -std=c++11 dp_coins.cpp -o changedp
+CXX = g++
+CXXFLAGS = -c -std=c++98 -Wall
 
-clean: 
-	rm -f changedp
+changegreedy.o: changegreedy.h changegreedy.cpp
+	${CXX} ${CXXFLAGS} changegreedy.cpp

@@ -1,3 +1,6 @@
+
+#include "changegreedy.hpp"
+
 /*
 Function: changegreedy
 Parameters: int array, int array, int a, int length
