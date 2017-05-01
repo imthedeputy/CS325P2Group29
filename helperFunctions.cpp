@@ -127,12 +127,12 @@ void changedp(int V[], int C[], int length, int A, int m) {
 
     m = cases[A];
 
-    cout << "Min coins = " << cases[A] << endl;
-    cout << "C = ";
-    for(int i = 0; i < length; i++) {
-        cout << C[i] << " ";
-    }
-    cout << endl;
+//    cout << "Min coins = " << cases[A] << endl;
+//    cout << "C = ";
+//    for(int i = 0; i < length; i++) {
+//        cout << C[i] << " ";
+//    }
+//    cout << endl;
 
     return;
 }
