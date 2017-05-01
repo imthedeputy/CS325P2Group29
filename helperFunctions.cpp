@@ -147,7 +147,7 @@ void algo1(struct changeInfo& changeData){
     changeslow(changeData.amount, 0, changeData.denomsUsed, changeData.denoms, savedCombo, totalCoins);
     //how long did it run for?
     auto elapsed = chrono::high_resolution_clock::now() - start; //get elapsed time
-    changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count(); //save time elapsed;
+    changeData.runtime = chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count(); //save time elapsed;
     //save the minimum change combination
     changeData.denomsUsed = savedCombo;
     //save the number of coins used
@@ -174,7 +174,7 @@ void algo2(struct changeInfo& changeData) {
     //changegreedyTWO(changeData.denoms, changeData.coinsUsed, amount);
     auto elapsed = chrono::high_resolution_clock::now() - start; //get elapsed time
 
-    changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count(); //save time elapsed;
+    changeData.runtime = chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count(); //save time elapsed;
 
     for (int i = 0; i < l; ++i) {
         changeData.denomsUsed.push_back(c[i]);
@@ -197,7 +197,7 @@ void algo3(struct changeInfo& changeData){
     auto start = chrono::high_resolution_clock::now();
     changedp(V, C, length, changeData.amount); 
     auto elapsed = chrono::high_resolution_clock::now() - start;
-    changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+    changeData.runtime = chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count();
 
     for(int i = 0; i < length; i++) {
         changeData.denomsUsed.push_back(C[i]);
