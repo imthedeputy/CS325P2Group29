@@ -88,15 +88,6 @@ void changegreedy(int v[], int c[], int a, int length) {
 void changedp(int V[], int C[], int length, int A) {
 	int m;
 
-	cout << "V = ";
-	for(int i = 0; i < length; i++) {
-		cout << V[i] << " ";
-	}
-	cout << endl;
-
-	cout << "length = " << length << endl;
-	cout << "A = " << A << endl;
-
 	for(int i = 0; i < length; i++) {
 		C[i] = 0;
 	}
@@ -130,32 +121,13 @@ void changedp(int V[], int C[], int length, int A) {
 
     int res_itr = A;
 
-    //Remove next 2 comments to print coins used
-//  cout << "The coins are: ";
     while(res_itr != 0) {
         int k = result[res_itr];
-//      cout << V[k] << " ";
         C[k]++;
         res_itr = res_itr - V[k];
     }
-    cout << endl;
-
-	cout << "C = ";
-	for(int i = 0; i < length; i++) {
-		cout << C[i] << " ";
-	}
-	cout << endl;
 
     m = cases[A];
-
-	cout << "m = " << m << endl;
-
-//    cout << "Min coins = " << cases[A] << endl;
-//    cout << "C = ";
-//    for(int i = 0; i < length; i++) {
-//        cout << C[i] << " ";
-//    }
-//    cout << endl;
 
     return;
 }
@@ -232,7 +204,6 @@ void algo3(struct changeInfo& changeData){
     }
 
 	changeData.coinsUsed = coinCount(changeData.denomsUsed);
-	cout << "coinsUsed = " << changeData.coinsUsed << endl;
 
 	delete []V;
 	delete []C;
