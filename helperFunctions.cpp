@@ -85,12 +85,8 @@ void changegreedy(int v[], int c[], int a, int length) {
     }
 }
 
-void changedp(int V[], int C[], int length, int A) {
+int changedp(int V[], int C[], int length, int A) {
 	int m;
-
-	for(int i = 0; i < length; i++) {
-		C[i] = 0;
-	}
 
     int cases[A + 1]; 
     int result[A + 1];
@@ -104,7 +100,7 @@ void changedp(int V[], int C[], int length, int A) {
         result[i] = -1;
     }
 
-    //Compute minimum coins for V = 1...V
+    //Compute minimum coins for V = 1...A
     for(int i = 1; i <= A; i++) {
         //Loop through denominations that are <= i
         for(int j = length - 1; j >= 0; j--) {
@@ -119,17 +115,17 @@ void changedp(int V[], int C[], int length, int A) {
         }
     }
 
+	//Iterate through result
     int res_itr = A;
-
     while(res_itr != 0) {
-        int k = result[res_itr];
-        C[k]++;
-        res_itr = res_itr - V[k];
+		//Increment times denomination has been used and move iterator
+        C[result[res_itr]]++;
+        res_itr = res_itr - V[result[res_itr]];
     }
 
     m = cases[A];
 
-    return;
+    return m;
 }
 
 void algo1(struct changeInfo& changeData){
@@ -192,18 +188,17 @@ void algo3(struct changeInfo& changeData){
 
 	for(int i = 0; i < length; i++) {
 		V[i] = changeData.denoms[i];
+		C[i] = 0;
 	}
     
     auto start = chrono::high_resolution_clock::now();
-    changedp(V, C, length, changeData.amount); 
+    changeData.coinsUsed = changedp(V, C, length, changeData.amount); 
     auto elapsed = chrono::high_resolution_clock::now() - start;
     changeData.runtime = chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
 
     for(int i = 0; i < length; i++) {
         changeData.denomsUsed.push_back(C[i]);
     }
-
-	changeData.coinsUsed = coinCount(changeData.denomsUsed);
 
 	delete []V;
 	delete []C;
