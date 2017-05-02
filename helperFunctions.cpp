@@ -20,23 +20,7 @@ int coinCount(vector<int>& denomsUsed){
 }
 
 void changeslow(int amount, int index, vector<int>& coinsUsed, vector<int>& coins, vector<int>& savedCombo, int& totalCoins){
-//    //index is out of bounds, we need to find out what the results were
-//    if(index >= (int)coins.size()){
-//        int sumComboNew = 0;
-//        
-//        //to determine which combination produces the smallest number of coins used, sum through each vector and compare their sums. save the smallest vector as saved combo
-//        sumComboNew = coinCount(coinsUsed);
-//        //is the new total coins less than the previous iteration? if so save this vector as the one of interest
-//        if(sumComboNew < totalCoins){
-//            //set the new total coins used to the new minimum if it exists
-//            totalCoins = sumComboNew;
-//            //save the coins used vector to the minimum combination vector
-//            savedCombo = coinsUsed;
-//        }
-//        
-//        return;
-//    }
-//    
+
     //if we are at the last index, this is the base case
     if(index == (int)coins.size() -1){
         //can we make change with this coin?
