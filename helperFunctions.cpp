@@ -1,16 +1,16 @@
-//
-//  helperFunctions.cpp
-//  Project2
-//
-//  Created by eli goodwin on 4/28/17.
-//  Copyright © 2017 eli goodwin. All rights reserved.
-//
-
+/*********************************************************************
+ ** Filename: helperFunctions.hpp
+ ** Author: Eli Goodwin, Benjamin Tate and Carlos La Hoz Daniels
+ ** Date: 20167/05/1
+ ** Description: This file contains all of the helper methods used in the fileprog and experimental programs.
+ ** Input: none
+ ** Output: none
+ *********************************************************************/
 #include "helperFunctions.hpp"
 
 using namespace std;
 
-
+//used to count the number of coins in a vector
 int coinCount(vector<int>& denomsUsed){
     int sum = 0;
     for(int i = 0; i < (int)denomsUsed.size(); ++i){
@@ -20,39 +20,50 @@ int coinCount(vector<int>& denomsUsed){
 }
 
 void changeslow(int amount, int index, vector<int>& coinsUsed, vector<int>& coins, vector<int>& savedCombo, int& totalCoins){
-    //index is out of bounds, we need to find out what the results were
-    if(index >= (int)coins.size()){
-        int sumComboNew = 0;
-        
-        //to determine which combination produces the smallest number of coins used, sum through each vector and compare their sums. save the smallest vector as saved combo
-        sumComboNew = coinCount(coinsUsed);
-        //is the new total coins less than the previous iteration? if so save this vector as the one of interest
-        if(sumComboNew < totalCoins){
-            //set the new total coins used to the new minimum if it exists
-            totalCoins = sumComboNew;
-            //save the coins used vector to the minimum combination vector
-            savedCombo = coinsUsed;
-        }
-        
-        return;
-    }
-    
-    //if we are at the last index
+//    //index is out of bounds, we need to find out what the results were
+//    if(index >= (int)coins.size()){
+//        int sumComboNew = 0;
+//        
+//        //to determine which combination produces the smallest number of coins used, sum through each vector and compare their sums. save the smallest vector as saved combo
+//        sumComboNew = coinCount(coinsUsed);
+//        //is the new total coins less than the previous iteration? if so save this vector as the one of interest
+//        if(sumComboNew < totalCoins){
+//            //set the new total coins used to the new minimum if it exists
+//            totalCoins = sumComboNew;
+//            //save the coins used vector to the minimum combination vector
+//            savedCombo = coinsUsed;
+//        }
+//        
+//        return;
+//    }
+//    
+    //if we are at the last index, this is the base case
     if(index == (int)coins.size() -1){
-        //is this a good coin to use? meaning it produces no remainder?
+        //can we make change with this coin?
+        //is this a good coin to use? meaning it produces no remainder? if % == 0 then we can use this coin to make change for the remaining amount
         if(amount % coins[index] == 0){
             //add it to the count
             coinsUsed[index] = amount/coins[index];
-            //recursive call to get out of here
-            changeslow(0, index + 1, coinsUsed, coins, savedCombo, totalCoins);
+            int sumComboNew = 0;
+            
+            //to determine which combination produces the smallest number of coins used, sum through each vector and compare their sums. save the smallest vector as saved combo
+            sumComboNew = coinCount(coinsUsed);
+            //is the new total coins less than the previous iteration? if so save this vector as the one of interest
+            if(sumComboNew < totalCoins){
+                //set the new total coins used to the new minimum if it exists
+                totalCoins = sumComboNew;
+                //save the coins used vector to the minimum combination vector
+                savedCombo = coinsUsed;
+                return;
+            }
         }
-        
     }
     
     //we are not at the last index
     else{
-        //get the amount
+        //get the amount divide it by th coins we are using currently
         for(int i = 0; i <= amount/coins[index]; ++i){
+            //set the current number of coins being used for this iteration
             coinsUsed[index] = i;
             //to get the new amount, take the amount subtract the type of coin we are using and the number determined by the index
             int newAmount = (amount - coins[index] * i);

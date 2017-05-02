@@ -8,7 +8,7 @@
 
 #include "FileInAndOut.hpp"
 using namespace std;
-void InAndOut::loadFile(vector<struct changeInfo>& changeData, char* fileName){
+bool InAndOut::loadFile(vector<struct changeInfo>& changeData, char* fileName){
     string numString;
     ifstream myFile;
     
@@ -17,7 +17,7 @@ void InAndOut::loadFile(vector<struct changeInfo>& changeData, char* fileName){
     
     if(!myFile){
         cout << "You goofed, file cannot be opened." << endl;
-        return;
+        return false;
     }
 
     
@@ -44,15 +44,30 @@ void InAndOut::loadFile(vector<struct changeInfo>& changeData, char* fileName){
     //clear the file
     myFile.clear();
     
-    return;
+    return true;
 }
 
 
-void InAndOut::saveTXTFile(struct changeInfo& changeData){
+void InAndOut::saveTXTFile(struct changeInfo& changeData, char* fileName){
     
     ofstream outFile;
-    outFile.open(TXT_FILE_OUT, ios::out | ios::app);
-    cout << "Saving file as: " << TXT_FILE_OUT << endl;
+    
+    char tempName[200];
+    
+    //clear out the .txt of the passed filename
+    int i = 0;
+    while(fileName[i] != '\0'){
+        if(fileName[i] == '.'){
+            fileName[i] = '\0';
+        }
+        ++i;
+    }
+    //copy in the modified name
+    strcpy(tempName, fileName);
+    //concat with change.txt
+    strcat(tempName, "change.txt");
+    outFile.open(tempName, ios::out | ios::app);
+    cout << "Saving file as: " << tempName << endl;
     
     if(outFile.is_open()){
         outFile << "Algo in use: " << changeData.algoName << endl;

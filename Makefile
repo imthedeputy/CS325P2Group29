@@ -19,4 +19,4 @@ default: fileprog
 
 clean:
 	rm -f *.o fileprog experimentprog
-	rm -f AmountChange.txt
+	rm -f *change.txt

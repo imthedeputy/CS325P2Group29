@@ -1,11 +1,12 @@
-//
-//  experimental.cpp
-//  Project2
-//
-//  Created by eli goodwin on 4/30/17.
-//  Copyright © 2017 eli goodwin. All rights reserved.
-//
-
+/*********************************************************************
+ ** Program Filename: experimental.cpp // experimental prog
+ ** Author: Eli Goodwin, Benjamin Tate, Carlos La Hoz Daniels
+ ** Date: 2017/5/1
+ ** Description: This program measures the performance of three types of change making algorithms that employ 
+ ** brute force, greedy, and dynamic methodology.
+ ** Input: User specifies what algorithm they want to test, what denomination set they wish to use, and the anount set via command line arguments.
+ ** Output: .csv file containing the relevant change data from the experimental testing.
+ *********************************************************************/
 #include <vector>
 #include <iostream>
 
@@ -26,7 +27,7 @@ int main(int argc, const char * argv[]) {
     int amountTestSet = atoi(argv[3]); //Used for determinging which test set to use
     
 
-    InAndOut fileStuff;
+    InAndOut fileStuff; //create object for a file output
     
     vector<struct changeInfo> changeTestSet;
     //change denoms vector denoms[0] = v1, denoms[1] = v2, denoms[2]= v3;

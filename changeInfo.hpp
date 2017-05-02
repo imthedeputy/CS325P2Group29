@@ -1,11 +1,11 @@
-//
-//  changeInfo.h
-//  Project2
-//
-//  Created by eli goodwin on 4/28/17.
-//  Copyright © 2017 eli goodwin. All rights reserved.
-//
-
+/*********************************************************************
+ ** Filename: changeInfo.hpp
+ ** Author: Eli Goodwin, Benjamin Tate and Carlos La Hoz Daniels
+ ** Date: 2017/05/01
+ ** Description: A struct used to pass around change data for fileprog and experimentalprog. The struct stores
+ ** the denominations for testing, the denominations used to make change, the target amount, the number of
+ ** coins used to make change, and the algorithm used to generate the data.
+ *********************************************************************/
 #ifndef changeInfo_h
 #define changeInfo_h
 
