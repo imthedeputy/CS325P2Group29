@@ -177,24 +177,32 @@ void algo2(struct changeInfo& changeData) {
 }
 
 void algo3(struct changeInfo& changeData){
+	//Initialize length to hold the size of C and V
     int length = (int)changeData.denoms.size();
+	//Declare V and C arrays
     int* V = new int[length];
     int* C = new int[length]; 
 
+	//Copy denoms vector into V and initialize C with 0s
 	for(int i = 0; i < length; i++) {
 		V[i] = changeData.denoms[i];
 		C[i] = 0;
 	}
     
+	//Start clock
     auto start = chrono::high_resolution_clock::now();
+	//Call changedp and set coinsUsed
     changeData.coinsUsed = changedp(V, C, length, changeData.amount); 
+	//Stop clock and get time elapsed
     auto elapsed = chrono::high_resolution_clock::now() - start;
     changeData.runtime = chrono::duration_cast<std::chrono::nanoseconds>(elapsed).count();
 
+	//Add contents of C to denomsUsed vector
     for(int i = 0; i < length; i++) {
         changeData.denomsUsed.push_back(C[i]);
     }
 
+	//Deallocate array memories
 	delete []V;
 	delete []C;
 }
