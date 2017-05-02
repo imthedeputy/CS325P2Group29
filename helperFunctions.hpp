@@ -55,7 +55,10 @@ void algo2(struct changeInfo& changeData);
 
 /*********************************************************************
  ** Function: algo3
- ** Description: 
+ ** Description: algo3 contains the dynamic proogramming algorithm for making
+ **		change given a denomination set and a target amount. It goes through
+ **		all values from 1 to A and finds the minimum number of coins required
+ **		for each, and then it returns the number required for A.
  ** Parameters:
  **     vector<struct changeInfo>& changeData: contains all the data necessary
  **     for the change algorthm to operate.
